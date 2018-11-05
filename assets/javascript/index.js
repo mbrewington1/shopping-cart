@@ -62,8 +62,6 @@ const render = function () {
     products.append('<div>' + items[i].name + '</div>');
   };
 }
-// render()
-
 
 // Recieve the name and index as parameters.
 function duplicateCheck(name, index) {
