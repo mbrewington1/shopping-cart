@@ -63,6 +63,32 @@ const render = function () {
   };
 }
 
+$(".dropdown-item").on('click', function(){
+   var filterBy =  $(this).attr('data-item');
+   var filteredList;
+   if(filterBy === "all") {
+     filteredList = productList;
+
+   } else {
+     filteredList = productList.filter( item => {
+      return filterBy === item.category
+     })
+   }
+  
+
+   console.log(filteredList);
+   $('.item-list').empty();
+   for (let i = 0; i < filteredList.length; i++) {
+    $('.item-list').append(`<button class="product m-2 btn-${i} ${filteredList[i].category}">${filteredList[i].name}</button>`);
+    // Create the event listener that checks the shopping cart for duplicates.
+    $(`.btn-${i}`).on('click', function () {
+      duplicateCheck(filteredList[i].name, i);
+    });
+  }
+  
+   
+});
+
 // Recieve the name and index as parameters.
 function duplicateCheck(name, index) {
   // Get all items that are currently in the cart.
@@ -91,6 +117,8 @@ function duplicateCheck(name, index) {
     }
   }
 }
+
+
 
 // For each item in productList, create the button for it.
 for (let i = 0; i < productList.length; i++) {
